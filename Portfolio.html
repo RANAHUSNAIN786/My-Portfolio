@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -47,9 +47,8 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
         }
-        /* Heading Styles */
         .heading-about {
-            font-size: 2.75rem;
+            font-size: 2.25rem;
             background: linear-gradient(to right, #06b6d4, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -66,13 +65,13 @@
             background: #06b6d4;
         }
         .heading-skills {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             color: #22d3ee;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .heading-projects {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             color: #ffffff;
             position: relative;
             padding-bottom: 10px;
@@ -86,16 +85,34 @@
             font-size: 1.5rem;
         }
         .heading-testimonials {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             color: #a5f3fc;
             font-style: italic;
         }
         .heading-contact {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             background: linear-gradient(to right, #06b6d4, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+        #notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        #notification.success {
+            background-color: #10b981;
+            color: #ffffff;
+        }
+        #notification.error {
+            background-color: #ef4444;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -105,66 +122,90 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- Hero Section with 3D Canvas and Profile Image -->
+    <!-- Notification -->
+    <div id="notification"></div>
+
+    <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div id="hero-canvas" class="absolute inset-0 z-0"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div class="text-center md:text-left"><h1 class="text-5xl md:text-7xl font-bold mb-4 animate-text">Rana Husnain</h1>
-<h2 class="text-2xl md:text-3xl text-cyan-400 mb-6 animate-text delay-100">Laravel Developer & Web Designer</h2>
-<p class="text-lg md:text-xl mb-8 animate-text delay-200">Crafting scalable web solutions with creativity and precision.</p>
-
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-text">Rana Husnain</h1>
+                    <h2 class="text-xl md:text-2xl text-cyan-400 mb-6 animate-text delay-100">Laravel Developer & Web Designer</h2>
+                    <p class="text-base md:text-lg mb-8 animate-text delay-200">Crafting scalable web solutions with creativity and precision.</p>
                     <div class="flex justify-center md:justify-start gap-4">
                         <a href="#contact" class="bg-cyan-500 text-white px-6 py-3 rounded-full hover:bg-cyan-600 micro-hover">Contact Me</a>
                         <a href="#projects" class="border border-cyan-500 text-cyan-500 px-6 py-3 rounded-full hover:bg-cyan-500 hover:text-white micro-hover">View Projects</a>
                     </div>
                 </div>
-<img src="1.jpg" alt="Profile"  class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover [object-position:center_18%] shadow-lg glassmorphism animate-text delay-300">
+                <img src="project imgs/1.jpg" alt="Profile" class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover [object-position:center_18%] shadow-lg glassmorphism animate-text delay-300">
             </div>
         </div>
     </section>
 
-    <!-- About Section with Parallax -->
-    <section id="about" class="py-20 bg-gray-800 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1516321310763-4b6a155a79e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
-        <div class="container mx-auto px-4 glassmorphism p-8 rounded-lg">
-            <h2 class="text-4xl font-bold text-center mb-12 heading-about">Discover My Journey</h2>
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-800 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1516321310763-4b6a155a79e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+        <div class="container mx-auto px-4 glassmorphism p-6 md:p-8 rounded-lg">
+            <h2 class="heading-about text-center mb-12">Discover My Journey</h2>
             <div class="flex flex-col md:flex-row items-center gap-8">
-            <img src="1.jpg" alt="Profile" class="w-48 h-48 rounded-full object-cover [object-position:center_18%] shadow-lg">
-
+                <img src="project imgs/1.jpg" alt="Profile" class="w-40 h-40 rounded-full object-cover [object-position:center_18%] shadow-lg">
                 <div class="flex-1">
-                    <p class="text-lg leading-relaxed">
-                       I'm Muhammad Husnain, a self-taught Laravel Developer and Web Designer with over 5 years of practical experience. I specialize in building user-friendly and dynamic websites using Laravel, PHP, and modern frontend tools like Tailwind CSS, HTML, and JavaScript. From admin dashboards to creative UI designs, I focus on writing clean code and delivering fully responsive, real-world solutions. I’ve worked on diverse projects including music platforms, student portals, and information-based websites. </p>
+                    <p class="text-base md:text-lg leading-relaxed">
+                        I'm Muhammad Husnain, a self-taught Laravel Developer and Web Designer with over 5 years of practical experience. I specialize in building user-friendly and dynamic websites using Laravel, PHP, and modern frontend tools like Tailwind CSS, HTML, and JavaScript. From admin dashboards to creative UI designs, I focus on writing clean code and delivering fully responsive, real-world solutions. I’ve worked on diverse projects including music platforms, student portals, and information-based websites.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-900">
+    <section id="skills" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 heading-skills">My Expertise</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">Laravel</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">PHP</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">Tailwind CSS</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">MySQL</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">JavaScript</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">SQL</span>
-                <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-center hover:bg-cyan-600 micro-hover">Bootstrap</span>
+            <h2 class="heading-skills text-center mb-12">My Expertise</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fab fa-laravel text-red-500 text-xl"></i>
+                    <span class="font-semibold">Laravel</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fab fa-php text-indigo-400 text-xl"></i>
+                    <span class="font-semibold">PHP</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fas fa-wind text-cyan-400 text-xl"></i>
+                    <span class="font-semibold">Tailwind CSS</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fas fa-database text-yellow-400 text-xl"></i>
+                    <span class="font-semibold">MySQL</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fab fa-js text-yellow-300 text-xl"></i>
+                    <span class="font-semibold">JavaScript</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fas fa-server text-purple-300 text-xl"></i>
+                    <span class="font-semibold">SQL</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
+                    <i class="fab fa-bootstrap text-purple-500 text-xl"></i>
+                    <span class="font-semibold">Bootstrap</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section with Animated Thumbnails -->
-    <section id="projects" class="py-20 bg-gray-800">
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-gray-800">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 heading-projects">My Creations</h2>
+            <h2 class="heading-projects text-center mb-12">My Creations</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p11.png" alt="Project 1" class="w-full h-48 object-cover transform transition-transform duration-500">
+                    <img src="project imgs/p11.png" alt="Dog Info Website" class="w-full h-48 object-cover transform transition-transform duration-500">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Dog Info Website</h3>
-                        <p class="text-gray-300 mb-4">A colorful and interactive website showcasing different dog breeds with images,Dogs Medicines, and modern hover effects</p>
+                        <p class="text-gray-300 mb-4">A colorful and interactive website showcasing different dog breeds with images, dog medicines, and modern hover effects.</p>
                         <p class="text-cyan-400 mb-4">Tech: HTML, CSS, JavaScript, Tailwind CSS</p>
                         <div class="flex gap-4">
                             <a href="https://github.com/RANAHUSNAIN786/Puppies_Website" class="text-cyan-500 hover:text-cyan-400 micro-hover">GitHub</a>
@@ -173,10 +214,10 @@
                     </div>
                 </div>
                 <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p20.png" alt="Project 2" class="w-full h-48 object-cover transform transition-transform duration-500">
+                    <img src="project imgs/p20.png" alt="Music Streaming Website" class="w-full h-48 object-cover transform transition-transform duration-500">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Music Streaming Website </h3>
-                        <p class="text-gray-300 mb-4">A modern music website where users can browse, search, and stream music and videos. Includes features like star ratings, user reviews, and embedded media playback with a responsive design.</p>
+                        <h3 class="text-xl font-bold mb-2">Music Streaming Website</h3>
+                        <p class="text-gray-300 mb-4">A modern music website where users can browse, search, and stream music and videos. Includes star ratings, user reviews, and embedded media playback.</p>
                         <p class="text-cyan-400 mb-4">Tech: Laravel, Vue.js, MySQL</p>
                         <div class="flex gap-4">
                             <a href="#" class="text-cyan-500 hover:text-cyan-400 micro-hover">GitHub</a>
@@ -185,7 +226,7 @@
                     </div>
                 </div>
                 <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p27.png" alt="Project 3" class="w-full h-48 object-cover transform transition-transform duration-500">
+                    <img src="project imgs/p27.png" alt="Music Admin Dashboard" class="w-full h-48 object-cover transform transition-transform duration-500">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Music Admin Dashboard</h3>
                         <p class="text-gray-300 mb-4">A Laravel-based admin panel to upload and manage music tracks and videos with full metadata support like title, artist, album, genre, and year.</p>
@@ -200,56 +241,63 @@
         </div>
     </section>
 
-    <!-- Testimonials Slider -->
-    <section id="testimonials" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 heading-testimonials">What Clients Say</h2>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="heading-testimonials text-center mb-12 md:mb-16">What Our Clients Say</h2>
             <div class="relative overflow-hidden">
-                <div id="testimonial-slider" class="flex transition-transform duration-500">
-                    <div class="min-w-full p-8 glassmorphism rounded-lg text-center">
-                        <p class="text-lg italic mb-4">"Husnain's work on our e-commerce platform was exceptional. His attention to detail and expertise in Laravel made the project a success."</p>
-                        <p class="text-cyan-400 font-bold">— John Doe, CEO</p>
+                <div id="testimonial-slider" class="flex transition-transform duration-700 ease-in-out" role="region" aria-label="Testimonials slider">
+                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"Husnain's expertise in Laravel transformed our e-commerce platform into a seamless, high-performing solution."</p>
+                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— John Doe, CEO of TechTrend Innovations</p>
                     </div>
-                    <div class="min-w-full p-8 glassmorphism rounded-lg text-center">
-                        <p class="text-lg italic mb-4">"The task management app Husnain built for us has streamlined our workflow significantly. Highly recommended!"</p>
-                        <p class="text-cyan-400 font-bold">— Jane Smith, Project Manager</p>
+                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"The task management app Husnain developed revolutionized our team's productivity."</p>
+                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— Jane Smith, Project Manager at Workflow Solutions</p>
                     </div>
-                    <div class="min-w-full p-8 glassmorphism rounded-lg text-center">
-                        <p class="text-lg italic mb-4">"Husnain's design skills and technical expertise made our portfolio website stand out."</p>
-                        <p class="text-cyan-400 font-bold">— Alex Brown, Designer</p>
+                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"Husnain's creative design and technical skills made our portfolio website visually stunning and highly functional."</p>
+                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— Alex Brown, Creative Director at DesignHub</p>
                     </div>
                 </div>
-                <button id="prev-slide" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 micro-hover"><i class="fas fa-chevron-left"></i></button>
-                <button id="next-slide" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 micro-hover"><i class="fas fa-chevron-right"></i></button>
+                <button id="prev-slide" class="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-cyan-500 text-white p-3 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-200" aria-label="Previous testimonial">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button id="next-slide" class="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-cyan-500 text-white p-3 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-200" aria-label="Next testimonial">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                <div class="flex justify-center mt-6 space-x-2" id="slider-dots" role="tablist"></div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-800">
-    <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-12 heading-contact">Get in Touch</h2>
-        <div class="max-w-lg mx-auto glassmorphism p-8 rounded-lg shadow-lg">
-            <form id="contact-form" action="https://formspree.io/f/mblkyekn" method="POST">
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-300 mb-2">Name</label>
-                    <input type="text" id="name" name="name" class="w-full p-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Your Name" required>
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-300 mb-2">Email</label>
-                    <input type="email" id="email" name="email" class="w-full p-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Your Email" required>
-                </div>
-                <div class="mb-4">
-                    <label for="message" class="block text-gray-300 mb-2">Message</label>
-                    <textarea id="message" name="message" class="w-full p-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" rows="5" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="w-full bg-cyan-500 text-white p-3 rounded-lg hover:bg-cyan-600 micro-hover">Submit</button>
-            </form>
-            <div id="form-message" class="mt-4 text-center hidden"></div>
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="heading-contact text-center mb-12">📩 Get in Touch</h2>
+            <div class="max-w-lg mx-auto glassmorphism p-6 md:p-8 rounded-xl shadow-lg">
+                <form id="contact-form">
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-semibold mb-2 text-gray-300">Name</label>
+                        <input type="text" name="name" id="name" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:border-cyan-400" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-semibold mb-2 text-gray-300">Email</label>
+                        <input type="email" name="email" id="email" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:border-cyan-400" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-semibold mb-2 text-gray-300">Message</label>
+                        <textarea name="message" id="message" rows="5" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:border-cyan-400"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-cyan-500 hover:bg-cyan-600 rounded-lg text-white font-semibold transition duration-300">Send Message</button>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- Footer -->
     <footer class="py-6 bg-gray-800 text-center">
@@ -263,8 +311,37 @@
     </footer>
 
     <script>
-        // Initialize EmailJS with your public key
+        // Initialize EmailJS
         emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+
+        // Notification function
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `block ${type}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1';
+                }, 300);
+            }, 3000);
+        }
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form)
+                .then(() => {
+                    showNotification('Message sent successfully!', 'success');
+                    form.reset();
+                }, (error) => {
+                    showNotification('Failed to send message. Please try again.', 'error');
+                    console.error('EmailJS error:', error);
+                });
+        });
 
         // Dark Mode Toggle
         const themeToggle = document.getElementById('theme-toggle');
@@ -275,91 +352,56 @@
 
         // GSAP Scroll-Triggered Animations
         gsap.registerPlugin(ScrollTrigger);
-
-        // Hero Section Text Animations
         gsap.utils.toArray('.animate-text').forEach(el => {
             gsap.from(el, {
                 opacity: 0,
                 y: 50,
                 duration: 1,
                 delay: parseFloat(el.dataset.delay || 0) / 1000,
-                scrollTrigger: {
-                    trigger: '#hero',
-                    start: 'top 80%'
-                }
+                scrollTrigger: { trigger: '#hero', start: 'top 80%' }
             });
         });
-
-        // About Section Heading (Fade + Scale)
         gsap.from('.heading-about', {
             opacity: 0,
             scale: 0.8,
             duration: 1.2,
             ease: 'back.out(1.7)',
-            scrollTrigger: {
-                trigger: '#about',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '#about', start: 'top 80%' }
         });
-
-        // Skills Section Heading (Slide from Left)
         gsap.from('.heading-skills', {
             opacity: 0,
             x: -100,
             duration: 1,
             ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '#skills',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '#skills', start: 'top 80%' }
         });
-
-        // Projects Section Heading (Rotate + Fade)
         gsap.from('.heading-projects', {
             opacity: 0,
             rotation: 10,
             duration: 1,
             ease: 'elastic.out(1, 0.5)',
-            scrollTrigger: {
-                trigger: '#projects',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '#projects', start: 'top 80%' }
         });
-
-        // Testimonials Section Heading (Fade + Bounce)
         gsap.from('.heading-testimonials', {
             opacity: 0,
             y: 30,
             duration: 1,
             ease: 'bounce.out',
-            scrollTrigger: {
-                trigger: '#testimonials',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '#testimonials', start: 'top 80%' }
         });
-
-        // Contact Section Heading (Pulse Effect)
         gsap.from('.heading-contact', {
             opacity: 0,
             scale: 0.9,
             duration: 1,
             ease: 'power3.inOut',
-            scrollTrigger: {
-                trigger: '#contact',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '#contact', start: 'top 80%' }
         });
-
-        // Project Cards Animation
         gsap.utils.toArray('.project-card').forEach(card => {
             gsap.from(card, {
                 opacity: 0,
                 y: 100,
                 duration: 1,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%'
-                }
+                scrollTrigger: { trigger: card, start: 'top 80%' }
             });
             card.querySelector('img').addEventListener('mouseenter', () => {
                 gsap.to(card.querySelector('img'), { scale: 1.1, duration: 0.3 });
@@ -371,62 +413,66 @@
 
         // Testimonials Slider
         const slider = document.getElementById('testimonial-slider');
-        const prevBtn = document.getElementById('prev-slide');
-        const nextBtn = document.getElementById('next-slide');
-        let currentSlide = 0;
-        const slides = slider.children.length;
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        const dotsContainer = document.getElementById('slider-dots');
+        const slides = slider.children;
+        let currentIndex = 0;
+        let autoSlideInterval;
 
-        nextBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        for (let i = 0; i < slides.length; i++) {
+            const dot = document.createElement('button');
+            dot.className = `w-3 h-3 rounded-full ${i === 0 ? 'bg-cyan-500' : 'bg-gray-500'} focus:outline-none focus:ring-2 focus:ring-cyan-400`;
+            dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = dotsContainer.children;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = `w-3 h-3 rounded-full ${i === currentIndex ? 'bg-cyan-500' : 'bg-gray-500'} focus:outline-none focus:ring-2 focus:ring-cyan-400`;
+            }
+        }
+
+        function goToSlide(index) {
+            currentIndex = (index + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        prevButton.addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
         });
-        prevBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides) % slides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        nextButton.addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
         });
 
-        // Contact Form Animation and Submission
-        const form = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-        const formInputs = document.querySelectorAll('#contact-form input, #contact-form textarea');
-
-        formInputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                gsap.to(input, { scale: 1.02, duration: 0.2 });
-            });
-            input.addEventListener('blur', () => {
-                gsap.to(input, { scale: 1, duration: 0.2 });
-            });
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
-                .then(() => {
-                    formMessage.classList.remove('hidden', 'text-red-500');
-                    formMessage.classList.add('text-green-500');
-                    formMessage.textContent = 'Message sent successfully!';
-                    form.reset();
-                    gsap.fromTo(formMessage, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                    setTimeout(() => {
-                        gsap.to(formMessage, { opacity: 0, y: 20, duration: 0.5, onComplete: () => formMessage.classList.add('hidden') });
-                    }, 3000);
-                }, (error) => {
-                    formMessage.classList.remove('hidden', 'text-green-500');
-                    formMessage.classList.add('text-red-500');
-                    formMessage.textContent = 'Failed to send message. Please try again.';
-                    gsap.fromTo(formMessage, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                    setTimeout(() => {
-                        gsap.to(formMessage, { opacity: 0, y: 20, duration: 0.5, onComplete: () => formMessage.classList.add('hidden') });
-                    }, 3000);
-                });
-        });
+        startAutoSlide();
+        slider.addEventListener('mouseenter', stopAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
 
         // Three.js Hero Background
         const scene = new THREE.Scene();
