@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Husnain - Portfolio</title>
+    <title>Muhammad Husnain - Full Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -47,512 +47,609 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
         }
-        .heading-about {
-            font-size: 2.25rem;
-            background: linear-gradient(to right, #06b6d4, #3b82f6);
+        .heading-main {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
+            background-size: 200% auto;
+            animation: gradient 3s ease infinite;
         }
-        .heading-about::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: #06b6d4;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .heading-skills {
-            font-size: 2.25rem;
-            color: #22d3ee;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .skill-icon {
+            transition: all 0.3s ease;
         }
-        .heading-projects {
-            font-size: 2.25rem;
-            color: #ffffff;
-            position: relative;
-            padding-bottom: 10px;
+        .skill-icon:hover {
+            transform: scale(1.1) rotate(5deg);
         }
-        .heading-projects::before {
-            content: '✨';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: -30px;
-            font-size: 1.5rem;
+        .project-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .heading-testimonials {
-            font-size: 2.25rem;
-            color: #a5f3fc;
-            font-style: italic;
+        .project-card:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
         }
-        .heading-contact {
-            font-size: 2.25rem;
-            background: linear-gradient(to right, #06b6d4, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        .contact-input {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
         }
-        #notification {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            z-index: 1000;
-            transition: opacity 0.3s ease;
+        .contact-input:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
         }
-        #notification.success {
-            background-color: #10b981;
-            color: #ffffff;
-        }
-        #notification.error {
-            background-color: #ef4444;
-            color: #ffffff;
+        body.light-mode .contact-input {
+            background: rgba(243, 244, 246, 0.8);
+            border-color: rgba(6, 182, 212, 0.2);
         }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
     <!-- Dark Mode Toggle -->
-    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 micro-hover">
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 micro-hover shadow-lg">
         <i class="fas fa-moon"></i>
     </button>
-
-    <!-- Notification -->
-    <div id="notification"></div>
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div id="hero-canvas" class="absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900 z-0"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-text">Rana Husnain</h1>
-                    <h2 class="text-xl md:text-2xl text-cyan-400 mb-6 animate-text delay-100">Laravel Developer & Web Designer</h2>
-                    <p class="text-base md:text-lg mb-8 animate-text delay-200">Crafting scalable web solutions with creativity and precision.</p>
-                    <div class="flex justify-center md:justify-start gap-4">
-                        <a href="#contact" class="bg-cyan-500 text-white px-6 py-3 rounded-full hover:bg-cyan-600 micro-hover">Contact Me</a>
-                        <a href="#projects" class="border border-cyan-500 text-cyan-500 px-6 py-3 rounded-full hover:bg-cyan-500 hover:text-white micro-hover">View Projects</a>
+            <div class="flex flex-col items-center gap-8">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                    <img src="project imgs/1.jpg" alt="Profile" class="relative w-48 h-48 rounded-full object-cover [object-position:center_18%] border-4 border-gray-800 shadow-2xl">
+                </div>
+                <div>
+                    <h1 class="heading-main text-5xl md:text-6xl font-bold mb-4">Muhammad Husnain</h1>
+                    <h2 class="text-2xl md:text-3xl text-cyan-400 mb-6 font-semibold">Full-Stack Developer</h2>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+                        Building modern web applications with PHP/Laravel, Angular, ASP.NET Core & Flutter
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full hover:from-cyan-600 hover:to-blue-600 micro-hover font-semibold shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Contact Me
+                        </a>
+                        <a href="#projects" class="px-8 py-3 border-2 border-cyan-500 text-cyan-500 rounded-full hover:bg-cyan-500 hover:text-white micro-hover font-semibold">
+                            <i class="fas fa-code mr-2"></i>View Projects
+                        </a>
                     </div>
                 </div>
-                <img src="project imgs/1.jpg" alt="Profile" class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover [object-position:center_18%] shadow-lg glassmorphism animate-text delay-300">
+            </div>
+            <div class="mt-16 flex justify-center gap-6">
+                <a href="https://github.com/RANAHUSNAIN786" target="_blank" class="p-3 bg-gray-800 rounded-full hover:bg-cyan-500 micro-hover">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/muhammad-husnain-b47321340/" target="_blank" class="p-3 bg-gray-800 rounded-full hover:bg-cyan-500 micro-hover">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="mailto:ranahusnain786787@gmail.com" class="p-3 bg-gray-800 rounded-full hover:bg-cyan-500 micro-hover">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-800 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1516321310763-4b6a155a79e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
-        <div class="container mx-auto px-4 glassmorphism p-6 md:p-8 rounded-lg">
-            <h2 class="heading-about text-center mb-12">Discover My Journey</h2>
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <img src="project imgs/1.jpg" alt="Profile" class="w-40 h-40 rounded-full object-cover [object-position:center_18%] shadow-lg">
-                <div class="flex-1">
-                    <p class="text-base md:text-lg leading-relaxed">
-                        I'm Muhammad Husnain, a self-taught Laravel Developer and Web Designer with over 5 years of practical experience. I specialize in building user-friendly and dynamic websites using Laravel, PHP, and modern frontend tools like Tailwind CSS, HTML, and JavaScript. From admin dashboards to creative UI designs, I focus on writing clean code and delivering fully responsive, real-world solutions. I’ve worked on diverse projects including music platforms, student portals, and information-based websites.
-                    </p>
+    <section id="about" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="heading-main text-center mb-16">About Me</h2>
+            <div class="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-gray-700">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1">
+                        <p class="text-lg leading-relaxed mb-6">
+                            I am <span class="text-cyan-400 font-semibold">Muhammad Husnain</span>, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building web applications. My expertise spans across modern web technologies with a strong focus on both frontend and backend development.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-6">
+                            I specialize in <span class="text-red-400 font-semibold">PHP/Laravel</span> for robust backend solutions, <span class="text-blue-400 font-semibold">Angular</span> for dynamic frontends, and <span class="text-purple-400 font-semibold">ASP.NET Core</span> for scalable API development. Currently expanding my skills into <span class="text-cyan-400 font-semibold">Flutter</span> for cross-platform mobile applications.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            I believe in writing clean, maintainable code and following best practices to deliver efficient and scalable solutions that solve real-world problems.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-gray-900">
+    <!-- Skills Section - Redesigned with PHP/Laravel -->
+    <section id="skills" class="py-20 bg-gray-800">
         <div class="container mx-auto px-4">
-            <h2 class="heading-skills text-center mb-12">My Expertise</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fab fa-laravel text-red-500 text-xl"></i>
-                    <span class="font-semibold">Laravel</span>
+            <h2 class="heading-main text-center mb-16">Technical Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- PHP/Laravel Skills -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-cyan-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
+                        <i class="fab fa-php text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">PHP/Laravel</h3>
+                    <p class="text-gray-400 text-sm">Backend Development, MVC, REST APIs</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fab fa-php text-indigo-400 text-xl"></i>
-                    <span class="font-semibold">PHP</span>
+
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-red-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 flex items-center justify-center">
+                        <i class="fab fa-laravel text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Laravel Framework</h3>
+                    <p class="text-gray-400 text-sm">Eloquent ORM, Blade, Artisan</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fas fa-wind text-cyan-400 text-xl"></i>
-                    <span class="font-semibold">Tailwind CSS</span>
+
+                <!-- Frontend Skills -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-blue-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+                        <i class="fab fa-angular text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Angular</h3>
+                    <p class="text-gray-400 text-sm">TypeScript, RxJS, Components</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fas fa-database text-yellow-400 text-xl"></i>
-                    <span class="font-semibold">MySQL</span>
+
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-green-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center">
+                        <i class="fab fa-js text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">JavaScript/TypeScript</h3>
+                    <p class="text-gray-400 text-sm">ES6+, Async Programming</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fab fa-js text-yellow-300 text-xl"></i>
-                    <span class="font-semibold">JavaScript</span>
+
+                <!-- Microsoft Stack -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-purple-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                        <i class="fab fa-microsoft text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">ASP.NET Core</h3>
+                    <p class="text-gray-400 text-sm">C#, Web APIs, Entity Framework</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fas fa-server text-purple-300 text-xl"></i>
-                    <span class="font-semibold">SQL</span>
+
+                <!-- Database -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-emerald-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-emerald-500 to-green-400 flex items-center justify-center">
+                        <i class="fas fa-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Databases</h3>
+                    <p class="text-gray-400 text-sm">MySQL, SQL Server, PostgreSQL</p>
                 </div>
-                <div class="flex items-center justify-center gap-2 bg-gray-800 hover:bg-cyan-600 transition-all p-4 rounded-xl shadow-md">
-                    <i class="fab fa-bootstrap text-purple-500 text-xl"></i>
-                    <span class="font-semibold">Bootstrap</span>
+
+                <!-- Mobile -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-sky-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-sky-400 to-blue-400 flex items-center justify-center">
+                        <i class="fab fa-flutter text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Flutter</h3>
+                    <p class="text-gray-400 text-sm">Dart, Cross-platform, Widgets</p>
+                </div>
+
+                <!-- Tools -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center hover:bg-gradient-to-br from-gray-900 to-amber-900/30 transition-all skill-icon border border-gray-700">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-amber-500 to-orange-400 flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Tools & DevOps</h3>
+                    <p class="text-gray-400 text-sm">Git, Docker, CI/CD, Linux</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 bg-gray-800">
+    <section id="projects" class="py-20 bg-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="heading-skills text-center mb-12">My Creations</h2>
+            <h2 class="heading-main text-center mb-16">Featured Projects</h2>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                 
-                <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p20.png" alt="Music Streaming Website" class="w-full h-48 object-cover transform transition-transform duration-500">
+                <!-- Laravel Projects -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="project imgs/p20.png" alt="Music Streaming Platform" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-red-500 text-white text-xs rounded-full">Laravel</span>
+                        </div>
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Music Streaming Website</h3>
-                        <p class="text-gray-300 mb-4">A modern  <Strong>music website</Strong> where users can browse, search, and stream music and videos. Includes star ratings, user reviews, and embedded media playback.</p>
-                        <p class="text-cyan-400 mb-4">Tech: Laravel, Vue.js, MySQL</p>
+                        <h3 class="text-xl font-bold mb-3">Music Streaming Platform</h3>
+                        <p class="text-gray-400 mb-4">Full-featured music streaming website with user ratings, reviews, and embedded media playback.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">PHP</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Laravel</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">MySQL</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Vue.js</span>
+                        </div>
                         <div class="flex gap-4">
-                            <a href="#" class="text-cyan-500 hover:text-cyan-400 micro-hover">GitHub</a>
-                            <a href="#" class="text-cyan-500 hover:text-cyan-400 micro-hover">Demo</a>
+                            <a href="#" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fas fa-external-link-alt"></i> Live
+                            </a>
                         </div>
                     </div>
                 </div>
-                 <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p31.png"Music Streaming Website" class="w-full h-48 object-cover transform transition-transform duration-500">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">ANF Palaa Feed Website</h3>
-                        <p class="text-gray-300 mb-4"> A responsive product website built for <strong>ANF Palaa</strong>, a premium livestock feed brand. 
-                         The site highlights product details, benefits, and pricing with a clean UI. 
-                        Features include an interactive design, customer reviews section,  developed using JavaScript techniques</p>
-                        <p class="text-cyan-400 mb-4">Tech: HTML ,CSS,TailwindCSS, JavaScript</p>
-                        <div class="flex gap-4">
-                            <a href="https://anfpalaafeed.vercel.app/index.html" class="text-cyan-500 hover:text-cyan-400 micro-hover">Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p27.png" alt="Music Admin Dashboard" class="w-full h-48 object-cover transform transition-transform duration-500">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Music Admin Dashboard</h3>
-                        <p class="text-gray-300 mb-4">A Laravel-based <strong>Admin Panel</strong> to upload and manage music tracks and videos with full metadata support like title, artist, album, genre, and year.</p>
-                        <p class="text-cyan-400 mb-4">Tech: Laravel, PHP, MySQL, Tailwind CSS</p>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-cyan-500 hover:text-cyan-400 micro-hover">GitHub</a>
-                            <a href="#" class="text-cyan-500 hover:text-cyan-400 micro-hover">Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg project-card">
-                    <img src="project imgs/p11.png" alt="Dog Info Website" class="w-full h-48 object-cover transform transition-transform duration-500">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Dog Info Website</h3>
-                        <p class="text-gray-300 mb-4">A colorful and interactive website showcasing different dog breeds with images, dog medicines, and modern hover effects.</p>
-                        <p class="text-cyan-400 mb-4">Tech: HTML, CSS, JavaScript, Tailwind CSS</p>
-                        <div class="flex gap-4">
-                            <a href="https://github.com/RANAHUSNAIN786/Puppies_Website" class="text-cyan-500 hover:text-cyan-400 micro-hover">GitHub</a>
-                            <a href="https://puppiewebsite.netlify.app" class="text-cyan-500 hover:text-cyan-400 micro-hover">Demo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="heading-testimonials text-center mb-12 md:mb-16">What Our Clients Say</h2>
-            <div class="relative overflow-hidden">
-                <div id="testimonial-slider" class="flex transition-transform duration-700 ease-in-out" role="region" aria-label="Testimonials slider">
-                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
-                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"Husnain's expertise in Laravel transformed our e-commerce platform into a seamless, high-performing solution."</p>
-                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— John Doe, CEO of TechTrend Innovations</p>
+                <!-- ANF Palaa Feed -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="project imgs/p31.png" alt="ANF Palaa Feed" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-blue-500 text-white text-xs rounded-full">Frontend</span>
+                        </div>
                     </div>
-                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
-                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"The task management app Husnain developed revolutionized our team's productivity."</p>
-                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— Jane Smith, Project Manager at Workflow Solutions</p>
-                    </div>
-                    <div class="min-w-full p-6 sm:p-8 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
-                        <p class="text-base sm:text-lg text-gray-200 italic mb-4">"Husnain's creative design and technical skills made our portfolio website visually stunning and highly functional."</p>
-                        <p class="text-cyan-400 font-semibold text-sm sm:text-base">— Alex Brown, Creative Director at DesignHub</p>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">ANF Palaa Feed</h3>
+                        <p class="text-gray-400 mb-4">Responsive product website for premium livestock feed brand with interactive design.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">HTML5</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">TailwindCSS</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">JavaScript</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://anfpalaafeed.vercel.app/index.html" target="_blank" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <button id="prev-slide" class="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-cyan-500 text-white p-3 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-200" aria-label="Previous testimonial">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <button id="next-slide" class="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-cyan-500 text-white p-3 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-200" aria-label="Next testimonial">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-                <div class="flex justify-center mt-6 space-x-2" id="slider-dots" role="tablist"></div>
+
+                <!-- Laravel Admin Dashboard -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="project imgs/p27.png" alt="Music Admin Dashboard" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-red-500 text-white text-xs rounded-full">Laravel</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Music Admin Dashboard</h3>
+                        <p class="text-gray-400 mb-4">Admin panel for music content management with full CRUD operations and metadata support.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Laravel</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">PHP</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">MySQL</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Tailwind</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dog Info Website -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="project imgs/p11.png" alt="Dog Information Portal" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-blue-500 text-white text-xs rounded-full">Frontend</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Dog Information Portal</h3>
+                        <p class="text-gray-400 mb-4">Interactive website showcasing dog breeds with images, health information, and care tips.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">HTML/CSS</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">JavaScript</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Tailwind</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/RANAHUSNAIN786/Puppies_Website" target="_blank" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://puppiewebsite.netlify.app" target="_blank" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fas fa-external-link-alt"></i> Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather App -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="project imgs/p32.png" alt="Weather Application" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-green-500 text-white text-xs rounded-full">API</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Weather Application</h3>
+                        <p class="text-gray-400 mb-4">Responsive weather app fetching real-time data with clean interface and temperature conversion.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">JavaScript</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">API</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">CSS3</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/RANAHUSNAIN786/Weather_API" target="_blank" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://weather-app-liart-one-51.vercel.app/" target="_blank" class="text-cyan-500 hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fas fa-external-link-alt"></i> Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flutter Mobile App -->
+                <div class="project-card bg-gray-800 rounded-2xl overflow-hidden border-2 border-dashed border-cyan-500/30">
+                    <div class="h-48 bg-gradient-to-br from-gray-800 to-cyan-900/20 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center">
+                                <i class="fab fa-flutter text-white text-2xl"></i>
+                            </div>
+                            <span class="text-cyan-400 font-semibold">In Development</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Flutter Mobile App</h3>
+                        <p class="text-gray-400 mb-4">Cross-platform mobile application with modern UI/UX and high performance.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Flutter</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Dart</span>
+                            <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs rounded">Firebase</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-cyan-400">
+                            <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+                            <span class="text-sm">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="heading-main text-center mb-16">Get In Touch</h2>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold mb-3 text-cyan-400">Name</label>
+                            <input type="text" name="name" id="name" required 
+                                   class="w-full p-4 rounded-xl contact-input focus:outline-none">
+                        </div>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-center mb-12 text-3xl font-bold">📩 Get in Touch</h2>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold mb-3 text-cyan-400">Email</label>
+                            <input type="email" name="email" id="email" required 
+                                   class="w-full p-4 rounded-xl contact-input focus:outline-none">
+                        </div>
 
-      <div class="max-w-lg mx-auto p-6 md:p-8 rounded-xl shadow-lg bg-gray-900 bg-opacity-60 backdrop-blur-md">
-        <form id="contact-form" class="space-y-6">
-          <div>
-            <label for="name" class="block text-sm font-semibold mb-2">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:border-cyan-400"
-            />
-          </div>
+                        <div>
+                            <label for="message" class="block text-sm font-semibold mb-3 text-cyan-400">Message</label>
+                            <textarea name="message" id="message" rows="5" required 
+                                      class="w-full p-4 rounded-xl contact-input focus:outline-none resize-none"></textarea>
+                        </div>
 
-          <div>
-            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:border-cyan-400"
-            />
-          </div>
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl text-white font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-paper-plane mr-3"></i>Send Message
+                        </button>
+                    </form>
 
-          <div>
-            <label for="message" class="block text-sm font-semibold mb-2">Message</label>
-            <textarea
-              name="message"
-              id="message"
-              rows="5"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:border-cyan-400"
-            ></textarea>
-          </div>
+                    <!-- Success Message -->
+                    <div id="success-message" class="mt-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl hidden">
+                        <p class="text-green-400 text-center font-medium">
+                            <i class="fas fa-check-circle mr-2"></i>Message sent successfully!
+                        </p>
+                    </div>
 
-          <button
-            type="submit"
-            class="w-full py-3 bg-cyan-500 hover:bg-cyan-600 rounded-lg text-white font-semibold transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
-
-        <!-- Success Message -->
-        <p id="success-message" class="mt-4 text-green-400 text-center font-medium hidden">
-          ✅ Message submitted successfully!
-        </p>
-      </div>
-    </div>
-  </section>
-
-    <!-- Footer -->
-    <footer class="py-6 bg-gray-800 text-center">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center gap-6 mb-4">
-                <a href="https://github.com/RANAHUSNAIN786" class="text-cyan-500 hover:text-cyan-400 micro-hover"><i class="fab fa-github text-2xl"></i></a>
-                <a href="" class="text-cyan-500 hover:text-cyan-400 micro-hover"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <!-- Direct Contact Info -->
+                    <div class="mt-8 pt-8 border-t border-gray-700">
+                        <p class="text-center text-gray-400 mb-6">Or reach out directly:</p>
+                        <div class="flex justify-center gap-6">
+                            <a href="mailto:ranahusnain481@gmail.com" class="group flex items-center gap-3 text-cyan-400 hover:text-cyan-300">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <span>ranahusnain481@gmail.com</span>
+                            </a>
+                        </div>
+                        <div class="flex justify-center gap-6 mt-6">
+                            <a href="https://github.com/RANAHUSNAIN786" target="_blank" 
+                               class="p-3 bg-gray-700 rounded-full hover:bg-cyan-500 transition-all duration-300">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/muhammad-husnain-b47321340/" target="_blank" 
+                               class="p-3 bg-gray-700 rounded-full hover:bg-cyan-500 transition-all duration-300">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="text-gray-400">&copy; 2025 Muhammad Husnain. All rights reserved.</p>
         </div>
-    </footer>
+    </section>
+
+    <!-- Simplified Footer -->
+    <div class="py-6 bg-gray-900 text-center border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <p class="text-gray-400">
+                © 2024 Muhammad Husnain • Full-Stack Developer
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                PHP/Laravel • Angular • ASP.NET Core • Flutter
+            </p>
+        </div>
+    </div>
 
     <script>
-        // Initialize EmailJS
-        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
-
-        // Notification function
-        function showNotification(message, type) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `block ${type}`;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                    notification.style.opacity = '1';
-                }, 300);
-            }, 3000);
-        }
-
         // Form submission
         const form = document.getElementById("contact-form");
-    const successMessage = document.getElementById("success-message");
+        const successMessage = document.getElementById("success-message");
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+            submitBtn.disabled = true;
 
-      const formData = new FormData(form);
+            const formData = new FormData(form);
 
-      try {
-        const response = await fetch("https://formspree.io/f/mblkyekn", {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
+            try {
+                const response = await fetch("https://formspree.io/f/mblkyekn", {
+                    method: "POST",
+                    body: formData,
+                    headers: { Accept: "application/json" },
+                });
+
+                if (response.ok) {
+                    form.reset();
+                    successMessage.classList.remove("hidden");
+                    setTimeout(() => {
+                        successMessage.classList.add("hidden");
+                    }, 5000);
+                } else {
+                    alert("❌ Something went wrong. Please try again!");
+                }
+            } catch (error) {
+                alert("❌ Network error. Please check your connection.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
-
-        if (response.ok) {
-          form.reset();
-          successMessage.classList.remove("hidden");
-        } else {
-          alert("❌ Something went wrong. Try again!");
-        }
-      } catch (error) {
-        alert("❌ Failed to submit. Try later.");
-      }
-    });
 
         // Dark Mode Toggle
         const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
-            themeToggle.innerHTML = document.body.classList.contains('light-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                icon.className = 'fas fa-moon';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
         });
 
-        // GSAP Scroll-Triggered Animations
+        // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.animate-text').forEach(el => {
-            gsap.from(el, {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                delay: parseFloat(el.dataset.delay || 0) / 1000,
-                scrollTrigger: { trigger: '#hero', start: 'top 80%' }
-            });
-        });
-        gsap.from('.heading-about', {
+        
+        // Hero text animation
+        gsap.from('#hero h1', {
             opacity: 0,
-            scale: 0.8,
-            duration: 1.2,
-            ease: 'back.out(1.7)',
-            scrollTrigger: { trigger: '#about', start: 'top 80%' }
-        });
-        gsap.from('.heading-skills', {
-            opacity: 0,
-            x: -100,
+            y: 50,
             duration: 1,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: '#skills', start: 'top 80%' }
+            ease: 'power3.out'
         });
-        gsap.from('.heading-projects', {
-            opacity: 0,
-            rotation: 10,
-            duration: 1,
-            ease: 'elastic.out(1, 0.5)',
-            scrollTrigger: { trigger: '#projects', start: 'top 80%' }
-        });
-        gsap.from('.heading-testimonials', {
+        
+        gsap.from('#hero h2', {
             opacity: 0,
             y: 30,
             duration: 1,
-            ease: 'bounce.out',
-            scrollTrigger: { trigger: '#testimonials', start: 'top 80%' }
+            delay: 0.3,
+            ease: 'power3.out'
         });
-        gsap.from('.heading-contact', {
+        
+        gsap.from('#hero p', {
             opacity: 0,
-            scale: 0.9,
+            y: 30,
             duration: 1,
-            ease: 'power3.inOut',
-            scrollTrigger: { trigger: '#contact', start: 'top 80%' }
+            delay: 0.6,
+            ease: 'power3.out'
         });
-        gsap.utils.toArray('.project-card').forEach(card => {
-            gsap.from(card, {
+        
+        gsap.from('#hero img', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            delay: 0.9,
+            ease: 'back.out(1.7)'
+        });
+
+        // Section animations
+        gsap.utils.toAll('section', (section) => {
+            gsap.from(section, {
                 opacity: 0,
-                y: 100,
+                y: 50,
                 duration: 1,
-                scrollTrigger: { trigger: card, start: 'top 80%' }
-            });
-            card.querySelector('img').addEventListener('mouseenter', () => {
-                gsap.to(card.querySelector('img'), { scale: 1.1, duration: 0.3 });
-            });
-            card.querySelector('img').addEventListener('mouseleave', () => {
-                gsap.to(card.querySelector('img'), { scale: 1, duration: 0.3 });
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                }
             });
         });
 
-        // Testimonials Slider
-        const slider = document.getElementById('testimonial-slider');
-        const prevButton = document.getElementById('prev-slide');
-        const nextButton = document.getElementById('next-slide');
-        const dotsContainer = document.getElementById('slider-dots');
-        const slides = slider.children;
-        let currentIndex = 0;
-        let autoSlideInterval;
-
-        for (let i = 0; i < slides.length; i++) {
-            const dot = document.createElement('button');
-            dot.className = `w-3 h-3 rounded-full ${i === 0 ? 'bg-cyan-500' : 'bg-gray-500'} focus:outline-none focus:ring-2 focus:ring-cyan-400`;
-            dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
-
-        const dots = dotsContainer.children;
-
-        function updateSlider() {
-            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].className = `w-3 h-3 rounded-full ${i === currentIndex ? 'bg-cyan-500' : 'bg-gray-500'} focus:outline-none focus:ring-2 focus:ring-cyan-400`;
+        // Skill icons animation
+        gsap.from('.skill-icon', {
+            opacity: 0,
+            y: 30,
+            stagger: 0.1,
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: '#skills',
+                start: 'top 70%'
             }
-        }
-
-        function goToSlide(index) {
-            currentIndex = (index + slides.length) % slides.length;
-            updateSlider();
-        }
-
-        function nextSlide() {
-            goToSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            goToSlide(currentIndex - 1);
-        }
-
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(nextSlide, 5000);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        prevButton.addEventListener('click', () => {
-            stopAutoSlide();
-            prevSlide();
-            startAutoSlide();
         });
 
-        nextButton.addEventListener('click', () => {
-            stopAutoSlide();
-            nextSlide();
-            startAutoSlide();
+        // Project cards animation
+        gsap.from('.project-card', {
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: '#projects',
+                start: 'top 70%'
+            }
         });
 
-        startAutoSlide();
-        slider.addEventListener('mouseenter', stopAutoSlide);
-        slider.addEventListener('mouseleave', startAutoSlide);
-
-        // Three.js Hero Background
+        // Three.js Background
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        const renderer = new THREE.WebGLRenderer({ 
+            alpha: true,
+            antialias: true 
+        });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('hero-canvas').appendChild(renderer.domElement);
 
-        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00f6ff, wireframe: true });
-        const torusKnot = new THREE.Mesh(geometry, material);
-        scene.add(torusKnot);
-        camera.position.z = 30;
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const count = 2000;
+        const positions = new Float32Array(count * 3);
+
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 100;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0x06b6d4,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        camera.position.z = 5;
 
         function animate() {
             requestAnimationFrame(animate);
-            torusKnot.rotation.x += 0.01;
-            torusKnot.rotation.y += 0.01;
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.001;
             renderer.render(scene, camera);
         }
         animate();
